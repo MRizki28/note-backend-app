@@ -17,4 +17,7 @@ composer install
 
 copy .env.example and create your app configuration
 
+```bash
 You can look in the Route folder, API.php to retrieve the URL
+```
+
