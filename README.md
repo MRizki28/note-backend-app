@@ -1,5 +1,3 @@
-## Clothing App
-Online Shop jersey 
 
 #### Installation
 copy and running code in below with your terminal/command
