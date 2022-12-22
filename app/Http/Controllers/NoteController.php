@@ -52,4 +52,42 @@ class NoteController extends Controller
         ]);
 
     }
+
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(),
+        [
+            'title' => '',
+            'note' => ''
+
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'failed',
+                'errors' =>$validator->errors()
+            ], Response::HTTP_NOT_ACCEPTABLE);
+        }
+
+        $validated = $validator->validate();
+
+        try {
+            $note = NoteModel::findOrFail($id);
+            $note->update($validated);
+        } catch (\Throwable $th) {
+
+            return response()->json([
+                'message' =>'failed',
+                'error' => $th->getMessage()
+            ]);
+            //throw $th;
+        }
+
+        return response()->json([
+            'message' => 'succes update data',
+            'data' => $note
+        ]);
+    }
 }
+
+
