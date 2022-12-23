@@ -69,7 +69,7 @@ class NoteController extends Controller
             ], Response::HTTP_NOT_ACCEPTABLE);
         }
 
-        $validated = $validator->validate();
+        $validated = $validator->validated();
 
         try {
             $note = NoteModel::findOrFail($id);
@@ -86,6 +86,25 @@ class NoteController extends Controller
         return response()->json([
             'message' => 'succes update data',
             'data' => $note
+        ]);
+    }
+
+    public function show($id)
+    {
+        $note = NoteModel::findOrFail($id);
+        return response()->json([
+            'message' => 'success tampilkan data',
+            'data' => $note
+        ]);
+    }
+
+    public function delete($id)
+    {
+        $note = NoteModel::findOrFail($id);
+        $note ->delete();
+
+        return response()->json([
+            'message' => "succesfully delete id {$id}",
         ]);
     }
 }
